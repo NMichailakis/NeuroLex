@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="el">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NeuroLex</title>
+<meta name="author" content="Nikos Michailakis">
+<meta name="copyright" content="© 2026 Nikos Michailakis. All rights reserved.">
+<style>
+:root{--bg:#f7f8fa;--card:#fff;--ink:#1c2430;--muted:#5d6b7c;--accent:#2f6fed;--line:#dfe4ea;--warn:#fff4e0}
+@media (prefers-color-scheme:dark){:root{--bg:#12161c;--card:#1b212a;--ink:#e8edf3;--muted:#9aa7b6;--accent:#6b9bff;--line:#2c3541;--warn:#2b2417}}
+*{box-sizing:border-box}
+body{margin:0;font:16px/1.55 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--bg);color:var(--ink)}
+header{display:flex;gap:20px;align-items:center;padding:14px 20px;border-bottom:1px solid var(--line);background:var(--card);position:sticky;top:0}
+header strong{font-size:18px;margin-right:auto}
+header a{color:var(--muted);text-decoration:none;font-size:14px}
+header a:hover{color:var(--accent)}
+main{max-width:860px;margin:0 auto;padding:24px 16px 48px}
+section{scroll-margin-top:70px;margin-bottom:32px}
+h1{font-size:26px;line-height:1.25;margin:0 0 8px}
+h2{font-size:20px;margin:0 0 12px}
+p{margin:0 0 12px}
+.muted{color:var(--muted)}
+.notice{background:var(--warn);border:1px solid var(--line);border-radius:10px;padding:12px 14px;font-size:14px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px}
+textarea{width:100%;min-height:180px;padding:12px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);font:inherit;resize:vertical}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:10px}
+button,select{font:inherit;padding:8px 14px;border-radius:8px;border:1px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer}
+button.primary{background:var(--accent);color:#fff;border-color:var(--accent)}
+.spacer{margin-left:auto}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:10px;margin-top:6px}
+.metric{border:1px solid var(--line);border-radius:10px;padding:10px 12px;background:var(--bg)}
+.metric b{display:block;font-size:22px}
+.metric span{font-size:13px;color:var(--muted)}
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+.cols .card h3{margin:0 0 6px;font-size:16px}
+.cols .card p{font-size:14px;margin:0;color:var(--muted)}
+ol{padding-left:20px}
+li{margin-bottom:6px}
+mark{background:#ffd96655;color:inherit;border-radius:3px;padding:0 2px}
+footer{text-align:center;font-size:13px;color:var(--muted);padding:0 16px 32px}
+</style>
+</head>
+<body>
+<header>
+  <strong>NeuroLex</strong>
+  <a href="#tool">Εργαλείο</a>
+  <a href="#how">Πώς μετρά</a>
+  <a href="#limits">Όρια</a>
+</header>
+<main>
+<section>
+  <h1>Γλωσσικοί δείκτες στον λόγο — όχι διάγνωση</h1>
+  <p class="muted">Ερευνητική εφαρμογή για τάξη και πιλοτική μελέτη. Μετρά λεξική ποικιλία, αντωνυμίες, κενό λόγο, δισταγμούς και εύρεση λέξης σε μεταγραφή ομιλίας. Δεν εκτιμά αν κάποιος «έχει Alzheimer».</p>
+  <div class="notice">Το NeuroLex δεν διαγιγνώσκει άνοια, Alzheimer ή ήπια γνωστική διαταραχή. Είναι εκπαιδευτικό εργαλείο γλωσσικών δεικτών για νευρογλωσσολογία και ψυχογλωσσολογία.</div>
+</section>
+
+<section id="tool">
+  <h2>Μεταγραφή ομιλίας</h2>
+  <div class="card">
+    <div class="row" style="margin:0 0 10px">
+      <label>Γλώσσα
+        <select id="lang"><option value="el">Ελληνικά</option><option value="en">English</option></select>
+      </label>
+      <button id="sampleTypical" type="button">Δείγμα τυπικό</button>
+      <button id="sampleEmpty" type="button">Δείγμα κενός λόγος</button>
+    </div>
+    <textarea id="text" placeholder="Επικολλήστε ή γράψτε τη μεταγραφή εδώ…"></textarea>
+    <div class="row">
+      <span class="muted" id="count">0 λέξεις</span>
+      <button id="analyze" class="primary spacer" type="button">Ανάλυση</button>
+    </div>
+  </div>
+  <h2 style="margin-top:24px">Αποτελέσματα</h2>
+  <div class="card" id="results">
+    <p class="muted" style="margin:0">Πατήστε «Ανάλυση» ή φορτώστε ένα από τα δύο διδακτικά δείγματα Cookie Theft για να δείτε πώς διαφέρουν οι δείκτες.</p>
+  </div>
+</section>
+
+<section id="how">
+  <h2>Τι μετράει και γιατί</h2>
+  <div class="cols">
+    <div class="card"><h3>Λεξική ποικιλία</h3><p>TTR, CTTR, MATTR. Σε μέρος της βιβλιογραφίας μειώνονται σε MCI / πρώιμη AD, ιδίως σε περιγραφή εικόνας.</p></div>
+    <div class="card"><h3>Αντωνυμίες &amp; κενός λόγος</h3><p>Περισσότερα «αυτό / κάτι / πράγμα» αντί για συγκεκριμένα ουσιαστικά σχετίζονται με ανομία.</p></div>
+    <div class="card"><h3>Δισταγμοί</h3><p>Fillers όπως «εε / εμ». Οι πραγματικές παύσεις χρειάζονται ηχητικό αρχείο — αυτό το site αναλύει κείμενο.</p></div>
+    <div class="card"><h3>Σύνταξη</h3><p>Μέσο μήκος εκφώνησης ως αδρός δείκτης απλοποίησης. Εξαρτάται από το έργο και τη στίξη.</p></div>
+  </div>
+</section>
+
+<section id="limits">
+  <h2>Πρωτόκολλο και όρια</h2>
+  <ol>
+    <li>Ίδιο έργο κάθε φορά (π.χ. περιγραφή Cookie Theft, περίπου ένα λεπτό).</li>
+    <li>Μεταγραφή με fillers και επαναλήψεις, χωρίς «καθάρισμα» του λόγου.</li>
+    <li>Σύγκριση με ομόλογη ομάδα (ηλικία, εκπαίδευση, γλώσσα) — όχι με απόλυτα κατώφλια.</li>
+    <li>Δεύτερο δείγμα πριν από οποιαδήποτε ερευνητική ερμηνεία.</li>
+    <li>Κλινική εκτίμηση ανήκει σε επαγγελματίες υγείας, όχι σε αυτή την εφαρμογή.</li>
+  </ol>
+</section>
+</main>
+<footer>NeuroLex · εκπαιδευτικό εργαλείο · © 2026 Νίκος Μιχαηλάκης. Με επιφύλαξη παντός δικαιώματος.<br>Ανεξάρτητο από το Linguify. Ο κώδικας τρέχει τοπικά στον browser — το κείμενο δεν στέλνεται σε διακομιστή.</footer>
+
+<!-- © 2026 Nikos Michailakis. All rights reserved. NeuroLex source code and text may not be copied, modified or redistributed without written permission. -->
+<script>
+const SAMPLES = {
+  el: {
+    typical: "Ένα αγόρι ανεβαίνει σε ένα σκαμνί για να φτάσει το βάζο με τα μπισκότα στο ντουλάπι. Το σκαμνί γέρνει και το αγόρι κινδυνεύει να πέσει. Δίπλα του στέκεται το κορίτσι και απλώνει το χέρι για ένα μπισκότο. Η μητέρα πλένει τα πιάτα στον νεροχύτη, αλλά το νερό ξεχειλίζει και μουσκεύει το πάτωμα. Εκείνη κοιτάζει έξω από το παράθυρο και δεν το προσέχει. Στον κήπο φαίνονται δέντρα και ένας δρόμος.",
+    empty: "Εε, ένα παιδί, αυτό, κάτι κάνει εκεί. Ανεβαίνει στο, εμ, στο πράγμα για να πάρει το, εεε, το αυτό. Και η κυρία, η κυρία, κάνει κάτι με τα, πώς το λένε, με τα πράγματα. Το αυτό τρέχει και, εεε, δεν ξέρω, είναι όλο αυτό το πράγμα εδώ. Και το άλλο παιδί κάτι θέλει. Δεν θυμάμαι πώς το λένε."
+  },
+  en: {
+    typical: "A boy is climbing onto a stool to reach the cookie jar in the cupboard. The stool is tipping and he is about to fall. Beside him a girl reaches out her hand for a cookie. The mother is washing dishes at the sink, but the water is overflowing onto the floor. She looks out the window and does not notice. Outside there are trees and a path.",
+    empty: "Um, a kid, uh, he's doing something there. He's getting up on the, um, the thing to get the, uh, the that. And the lady, the lady, is doing something with the, what's it called, with the stuff. The it is running and, uh, I don't know, it's all this thing here. And the other kid wants something. I can't remember what it's called."
+  }
+};
+
+const LEX = {
+  el: {
+    vague: ["αυτό","αυτός","αυτή","αυτά","αυτού","εκείνο","κάτι","πράγμα","πράγματα","το αυτό","τέτοιο","τέτοια","όλο","άλλο"],
+    fillers: ["εε","εεε","εεεε","εμ","εμμ","ααα","αα","χμ","μμ","μμμ","ε"],
+    wordFinding: ["πώς το λένε","πως το λένε","δεν θυμάμαι","δεν ξέρω","πώς λέγεται","πως λέγεται","το ξέχασα","πώς να το πω","πως να το πω"]
+  },
+  en: {
+    vague: ["it","this","that","these","those","thing","things","something","stuff","he","she","they","one"],
+    fillers: ["um","uh","er","erm","hmm","mm","ah","uhh","umm"],
+    wordFinding: ["what's it called","whats it called","what do you call","i can't remember","i don't know","you know","i forgot","what is it"]
+  }
+};
+
+const $ = id => document.getElementById(id);
+const norm = s => s.toLocaleLowerCase("el").normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/ς/g,"σ");
+function tokenize(text){
+  return (text.match(/[\p{L}\p{N}'’]+/gu) || []).map(w => w.replace(/[’]/g,"'"));
+}
+function countPhrases(normText, phrases){
+  let c = 0;
+  for(const p of phrases){
+    const np = norm(p);
+    let i = 0;
+    while((i = normText.indexOf(np, i)) !== -1){ c++; i += np.length; }
+  }
+  return c;
+}
+function mattr(tokens, win=50){
+  const n = tokens.length;
+  if(n === 0) return 0;
+  const w = Math.min(win, n);
+  let sum = 0, windows = 0;
+  const freq = new Map();
+  for(let i=0;i<n;i++){
+    freq.set(tokens[i], (freq.get(tokens[i])||0)+1);
+    if(i >= w){
+      const out = tokens[i-w];
+      const f = freq.get(out)-1;
+      if(f === 0) freq.delete(out); else freq.set(out,f);
+    }
+    if(i >= w-1){ sum += freq.size / w; windows++; }
+  }
+  return sum / windows;
+}
+function analyze(text, lang){
+  const raw = tokenize(text);
+  const normTokens = raw.map(norm);
+  const lex = LEX[lang];
+  const fillerSet = new Set(lex.fillers.map(norm));
+  const vagueSet = new Set(lex.vague.map(norm).filter(x => !x.includes(" ")));
+  const normText = " " + norm(text) + " ";
+
+  const fillers = normTokens.filter(t => fillerSet.has(t)).length;
+  const content = normTokens.filter(t => !fillerSet.has(t));
+  const N = content.length;
+  const V = new Set(content).size;
+  const vague = content.filter(t => vagueSet.has(t)).length;
+  let reps = 0;
+  for(let i=1;i<content.length;i++) if(content[i] === content[i-1]) reps++;
+  const wordFinding = countPhrases(normText, lex.wordFinding);
+
+  const utterances = text.split(/[.!?;·\n]+/).map(s => tokenize(s).filter(t => !fillerSet.has(norm(t))).length).filter(n => n > 0);
+  const mlu = utterances.length ? utterances.reduce((a,b)=>a+b,0)/utterances.length : 0;
+
+  return {
+    tokens: N, types: V,
+    ttr: N ? V/N : 0,
+    cttr: N ? V/Math.sqrt(2*N) : 0,
+    mattr: mattr(content),
+    vague, vagueRate: N ? vague/N : 0,
+    fillers, fillerRate: N ? fillers/(N+fillers) : 0,
+    reps, wordFinding,
+    utterances: utterances.length, mlu
+  };
+}
+const f2 = x => x.toFixed(2);
+const pct = x => (x*100).toFixed(1) + "%";
+function render(r){
+  const items = [
+    ["Λέξεις (χωρίς fillers)", r.tokens],
+    ["Διαφορετικές λέξεις", r.types],
+    ["TTR", f2(r.ttr)],
+    ["CTTR", f2(r.cttr)],
+    ["MATTR (παράθυρο 50)", f2(r.mattr)],
+    ["Αντωνυμίες / κενός λόγος", r.vague + " (" + pct(r.vagueRate) + ")"],
+    ["Δισταγμοί (fillers)", r.fillers + " (" + pct(r.fillerRate) + ")"],
+    ["Άμεσες επαναλήψεις", r.reps],
+    ["Εκφράσεις εύρεσης λέξης", r.wordFinding],
+    ["Εκφωνήσεις", r.utterances],
+    ["Μέσο μήκος εκφώνησης", f2(r.mlu) + " λέξεις"]
+  ];
+  $("results").innerHTML =
+    '<div class="grid">' + items.map(([k,v]) => '<div class="metric"><b>'+v+'</b><span>'+k+'</span></div>').join("") + '</div>' +
+    '<p class="muted" style="font-size:13px;margin:12px 0 0">Περιγραφικοί δείκτες μόνο. Δεν υπάρχουν κατώφλια και δεν προκύπτει διάγνωση· η σύγκριση γίνεται με ομόλογη ομάδα.</p>';
+}
+function updateCount(){
+  const t = $("text").value;
+  const n = tokenize(t).length;
+  $("count").textContent = n + (n === 1 ? " λέξη" : " λέξεις");
+}
+$("text").addEventListener("input", updateCount);
+$("analyze").addEventListener("click", () => {
+  const t = $("text").value.trim();
+  if(!t){ $("results").innerHTML = '<p class="muted" style="margin:0">Δεν υπάρχει κείμενο για ανάλυση.</p>'; return; }
+  render(analyze(t, $("lang").value));
+});
+function loadSample(kind){
+  const lang = $("lang").value;
+  $("text").value = SAMPLES[lang][kind];
+  updateCount();
+  render(analyze($("text").value, lang));
+}
+$("sampleTypical").addEventListener("click", () => loadSample("typical"));
+$("sampleEmpty").addEventListener("click", () => loadSample("empty"));
+</script>
+</body>
+</html>

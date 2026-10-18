@@ -38,67 +38,67 @@ button.primary{background:var(--accent);color:#fff;border-color:var(--accent)}
 ol{padding-left:20px}
 li{margin-bottom:6px}
 mark{background:#ffd96655;color:inherit;border-radius:3px;padding:0 2px}
+#langToggle{padding:5px 12px;font-size:13px;font-weight:600;letter-spacing:.04em}
 footer{text-align:center;font-size:13px;color:var(--muted);padding:0 16px 32px}
 </style>
 </head>
 <body>
 <header>
   <strong>NeuroLex</strong>
-  <a href="#tool">Εργαλείο</a>
-  <a href="#how">Πώς μετρά</a>
-  <a href="#limits">Όρια</a>
+  <a href="#tool" data-i18n="nav_tool">Εργαλείο</a>
+  <a href="#how" data-i18n="nav_how">Πώς μετρά</a>
+  <a href="#limits" data-i18n="nav_limits">Όρια</a>
+  <button id="langToggle" type="button" aria-label="Switch language / Αλλαγή γλώσσας" title="English / Ελληνικά">EN</button>
 </header>
 <main>
 <section>
-  <h1>Γλωσσικοί δείκτες στον λόγο — όχι διάγνωση</h1>
-  <p class="muted">Ερευνητική εφαρμογή για τάξη και πιλοτική μελέτη. Μετρά λεξική ποικιλία, αντωνυμίες, κενό λόγο, δισταγμούς και εύρεση λέξης σε μεταγραφή ομιλίας. Δεν εκτιμά αν κάποιος «έχει Alzheimer».</p>
-  <div class="notice">Το NeuroLex δεν διαγιγνώσκει άνοια, Alzheimer ή ήπια γνωστική διαταραχή. Είναι εκπαιδευτικό εργαλείο γλωσσικών δεικτών για νευρογλωσσολογία και ψυχογλωσσολογία.</div>
+  <h1 data-i18n="h1">Γλωσσικοί δείκτες στον λόγο — όχι διάγνωση</h1>
+  <p class="muted" data-i18n="lead">Ερευνητική εφαρμογή για τάξη και πιλοτική μελέτη. Μετρά λεξική ποικιλία, αντωνυμίες, κενό λόγο, δισταγμούς και εύρεση λέξης σε μεταγραφή ομιλίας. Δεν εκτιμά αν κάποιος «έχει Alzheimer».</p>
+  <div class="notice" data-i18n="notice">Το NeuroLex δεν διαγιγνώσκει άνοια, Alzheimer ή ήπια γνωστική διαταραχή. Είναι εκπαιδευτικό εργαλείο γλωσσικών δεικτών για νευρογλωσσολογία και ψυχογλωσσολογία.</div>
 </section>
 
 <section id="tool">
-  <h2>Μεταγραφή ομιλίας</h2>
+  <h2 data-i18n="h2_tool">Μεταγραφή ομιλίας</h2>
   <div class="card">
     <div class="row" style="margin:0 0 10px">
-      <label>Γλώσσα
+      <label><span data-i18n="lbl_lang">Γλώσσα</span>
         <select id="lang"><option value="el">Ελληνικά</option><option value="en">English</option></select>
       </label>
-      <button id="sampleTypical" type="button">Δείγμα τυπικό</button>
-      <button id="sampleEmpty" type="button">Δείγμα κενός λόγος</button>
+      <button id="sampleTypical" type="button" data-i18n="btn_typical">Δείγμα τυπικό</button>
+      <button id="sampleEmpty" type="button" data-i18n="btn_empty">Δείγμα κενός λόγος</button>
     </div>
-    <textarea id="text" placeholder="Επικολλήστε ή γράψτε τη μεταγραφή εδώ…"></textarea>
+    <textarea id="text" data-i18n-ph="ph" placeholder="Επικολλήστε ή γράψτε τη μεταγραφή εδώ…"></textarea>
     <div class="row">
       <span class="muted" id="count">0 λέξεις</span>
-      <button id="analyze" class="primary spacer" type="button">Ανάλυση</button>
+      <button id="analyze" class="primary spacer" type="button" data-i18n="btn_analyze">Ανάλυση</button>
     </div>
   </div>
-  <h2 style="margin-top:24px">Αποτελέσματα</h2>
-  <div class="card" id="results">
-    <p class="muted" style="margin:0">Πατήστε «Ανάλυση» ή φορτώστε ένα από τα δύο διδακτικά δείγματα Cookie Theft για να δείτε πώς διαφέρουν οι δείκτες.</p>
-  </div>
+  <h2 style="margin-top:24px" data-i18n="h2_results">Αποτελέσματα</h2>
+  <div class="card" id="results"></div>
 </section>
 
 <section id="how">
-  <h2>Τι μετράει και γιατί</h2>
+  <h2 data-i18n="h2_how">Τι μετράει και γιατί</h2>
   <div class="cols">
-    <div class="card"><h3>Λεξική ποικιλία</h3><p>TTR, CTTR, MATTR. Σε μέρος της βιβλιογραφίας μειώνονται σε MCI / πρώιμη AD, ιδίως σε περιγραφή εικόνας.</p></div>
-    <div class="card"><h3>Αντωνυμίες &amp; κενός λόγος</h3><p>Περισσότερα «αυτό / κάτι / πράγμα» αντί για συγκεκριμένα ουσιαστικά σχετίζονται με ανομία.</p></div>
-    <div class="card"><h3>Δισταγμοί</h3><p>Fillers όπως «εε / εμ». Οι πραγματικές παύσεις χρειάζονται ηχητικό αρχείο — αυτό το site αναλύει κείμενο.</p></div>
-    <div class="card"><h3>Σύνταξη</h3><p>Μέσο μήκος εκφώνησης ως αδρός δείκτης απλοποίησης. Εξαρτάται από το έργο και τη στίξη.</p></div>
+    <div class="card"><h3 data-i18n="c1_h">Λεξική ποικιλία</h3><p data-i18n="c1_p">TTR, CTTR, MATTR. Σε μέρος της βιβλιογραφίας μειώνονται σε MCI / πρώιμη AD, ιδίως σε περιγραφή εικόνας.</p></div>
+    <div class="card"><h3 data-i18n="c2_h">Αντωνυμίες &amp; κενός λόγος</h3><p data-i18n="c2_p">Περισσότερα «αυτό / κάτι / πράγμα» αντί για συγκεκριμένα ουσιαστικά σχετίζονται με ανομία.</p></div>
+    <div class="card"><h3 data-i18n="c3_h">Δισταγμοί</h3><p data-i18n="c3_p">Fillers όπως «εε / εμ». Οι πραγματικές παύσεις χρειάζονται ηχητικό αρχείο — αυτό το site αναλύει κείμενο.</p></div>
+    <div class="card"><h3 data-i18n="c4_h">Σύνταξη</h3><p data-i18n="c4_p">Μέσο μήκος εκφώνησης ως αδρός δείκτης απλοποίησης. Εξαρτάται από το έργο και τη στίξη.</p></div>
   </div>
 </section>
 
 <section id="limits">
-  <h2>Πρωτόκολλο και όρια</h2>
+  <h2 data-i18n="h2_limits">Πρωτόκολλο και όρια</h2>
   <ol>
-    <li>Ίδιο έργο κάθε φορά (π.χ. περιγραφή Cookie Theft, περίπου ένα λεπτό).</li>
-    <li>Μεταγραφή με fillers και επαναλήψεις, χωρίς «καθάρισμα» του λόγου.</li>
-    <li>Σύγκριση με ομόλογη ομάδα (ηλικία, εκπαίδευση, γλώσσα) — όχι με απόλυτα κατώφλια.</li>
-    <li>Δεύτερο δείγμα πριν από οποιαδήποτε ερευνητική ερμηνεία.</li>
-    <li>Κλινική εκτίμηση ανήκει σε επαγγελματίες υγείας, όχι σε αυτή την εφαρμογή.</li>
+    <li data-i18n="l1">Ίδιο έργο κάθε φορά (π.χ. περιγραφή Cookie Theft, περίπου ένα λεπτό).</li>
+    <li data-i18n="l2">Μεταγραφή με fillers και επαναλήψεις, χωρίς «καθάρισμα» του λόγου.</li>
+    <li data-i18n="l3">Σύγκριση με ομόλογη ομάδα (ηλικία, εκπαίδευση, γλώσσα) — όχι με απόλυτα κατώφλια.</li>
+    <li data-i18n="l4">Δεύτερο δείγμα πριν από οποιαδήποτε ερευνητική ερμηνεία.</li>
+    <li data-i18n="l5">Κλινική εκτίμηση ανήκει σε επαγγελματίες υγείας, όχι σε αυτή την εφαρμογή.</li>
   </ol>
 </section>
 </main>
-<footer>NeuroLex · εκπαιδευτικό εργαλείο · © 2026 Νίκος Μιχαηλάκης. Με επιφύλαξη παντός δικαιώματος.<br>Ανεξάρτητο από το Linguify. Ο κώδικας τρέχει τοπικά στον browser — το κείμενο δεν στέλνεται σε διακομιστή.</footer>
+<footer><span data-i18n="f1">NeuroLex · εκπαιδευτικό εργαλείο · © 2026 Νίκος Μιχαηλάκης. Με επιφύλαξη παντός δικαιώματος.</span><br><span data-i18n="f2">Ανεξάρτητο από το Linguify. Ο κώδικας τρέχει τοπικά στον browser — το κείμενο δεν στέλνεται σε διακομιστή.</span></footer>
 
 <!-- © 2026 Nikos Michailakis. All rights reserved. NeuroLex source code and text may not be copied, modified or redistributed without written permission. -->
 <script>
@@ -188,45 +188,154 @@ function analyze(text, lang){
     utterances: utterances.length, mlu
   };
 }
+const UI = {
+  el: {
+    nav_tool:"Εργαλείο", nav_how:"Πώς μετρά", nav_limits:"Όρια",
+    h1:"Γλωσσικοί δείκτες στον λόγο — όχι διάγνωση",
+    lead:"Ερευνητική εφαρμογή για τάξη και πιλοτική μελέτη. Μετρά λεξική ποικιλία, αντωνυμίες, κενό λόγο, δισταγμούς και εύρεση λέξης σε μεταγραφή ομιλίας. Δεν εκτιμά αν κάποιος «έχει Alzheimer».",
+    notice:"Το NeuroLex δεν διαγιγνώσκει άνοια, Alzheimer ή ήπια γνωστική διαταραχή. Είναι εκπαιδευτικό εργαλείο γλωσσικών δεικτών για νευρογλωσσολογία και ψυχογλωσσολογία.",
+    h2_tool:"Μεταγραφή ομιλίας", lbl_lang:"Γλώσσα",
+    btn_typical:"Δείγμα τυπικό", btn_empty:"Δείγμα κενός λόγος", btn_analyze:"Ανάλυση",
+    ph:"Επικολλήστε ή γράψτε τη μεταγραφή εδώ…",
+    h2_results:"Αποτελέσματα",
+    res_initial:"Πατήστε «Ανάλυση» ή φορτώστε ένα από τα δύο διδακτικά δείγματα Cookie Theft για να δείτε πώς διαφέρουν οι δείκτες.",
+    res_none:"Δεν υπάρχει κείμενο για ανάλυση.",
+    res_note:"Περιγραφικοί δείκτες μόνο. Δεν υπάρχουν κατώφλια και δεν προκύπτει διάγνωση· η σύγκριση γίνεται με ομόλογη ομάδα.",
+    word_one:"λέξη", word_many:"λέξεις",
+    m_tokens:"Λέξεις (χωρίς fillers)", m_types:"Διαφορετικές λέξεις", m_ttr:"TTR", m_cttr:"CTTR", m_mattr:"MATTR (παράθυρο 50)",
+    m_vague:"Αντωνυμίες / κενός λόγος", m_fill:"Δισταγμοί (fillers)", m_reps:"Άμεσες επαναλήψεις",
+    m_wf:"Εκφράσεις εύρεσης λέξης", m_utt:"Εκφωνήσεις", m_mlu:"Μέσο μήκος εκφώνησης", m_mlu_unit:"λέξεις",
+    h2_how:"Τι μετράει και γιατί",
+    c1_h:"Λεξική ποικιλία", c1_p:"TTR, CTTR, MATTR. Σε μέρος της βιβλιογραφίας μειώνονται σε MCI / πρώιμη AD, ιδίως σε περιγραφή εικόνας.",
+    c2_h:"Αντωνυμίες & κενός λόγος", c2_p:"Περισσότερα «αυτό / κάτι / πράγμα» αντί για συγκεκριμένα ουσιαστικά σχετίζονται με ανομία.",
+    c3_h:"Δισταγμοί", c3_p:"Fillers όπως «εε / εμ». Οι πραγματικές παύσεις χρειάζονται ηχητικό αρχείο — αυτό το site αναλύει κείμενο.",
+    c4_h:"Σύνταξη", c4_p:"Μέσο μήκος εκφώνησης ως αδρός δείκτης απλοποίησης. Εξαρτάται από το έργο και τη στίξη.",
+    h2_limits:"Πρωτόκολλο και όρια",
+    l1:"Ίδιο έργο κάθε φορά (π.χ. περιγραφή Cookie Theft, περίπου ένα λεπτό).",
+    l2:"Μεταγραφή με fillers και επαναλήψεις, χωρίς «καθάρισμα» του λόγου.",
+    l3:"Σύγκριση με ομόλογη ομάδα (ηλικία, εκπαίδευση, γλώσσα) — όχι με απόλυτα κατώφλια.",
+    l4:"Δεύτερο δείγμα πριν από οποιαδήποτε ερευνητική ερμηνεία.",
+    l5:"Κλινική εκτίμηση ανήκει σε επαγγελματίες υγείας, όχι σε αυτή την εφαρμογή.",
+    f1:"NeuroLex · εκπαιδευτικό εργαλείο · © 2026 Νίκος Μιχαηλάκης. Με επιφύλαξη παντός δικαιώματος.",
+    f2:"Ανεξάρτητο από το Linguify. Ο κώδικας τρέχει τοπικά στον browser — το κείμενο δεν στέλνεται σε διακομιστή.",
+    toggle:"EN"
+  },
+  en: {
+    nav_tool:"Tool", nav_how:"How it works", nav_limits:"Limits",
+    h1:"Linguistic markers in speech — not a diagnosis",
+    lead:"A research application for classroom use and pilot studies. It measures lexical diversity, pronouns, empty speech, hesitations and word-finding in a speech transcript. It does not estimate whether someone “has Alzheimer’s”.",
+    notice:"NeuroLex does not diagnose dementia, Alzheimer’s disease or mild cognitive impairment. It is an educational tool for linguistic markers in neurolinguistics and psycholinguistics.",
+    h2_tool:"Speech transcript", lbl_lang:"Transcript language",
+    btn_typical:"Typical sample", btn_empty:"Empty-speech sample", btn_analyze:"Analyze",
+    ph:"Paste or type the transcript here…",
+    h2_results:"Results",
+    res_initial:"Press “Analyze” or load one of the two Cookie Theft teaching samples to see how the indicators differ.",
+    res_none:"There is no text to analyze.",
+    res_note:"Descriptive indicators only. There are no thresholds and no diagnosis is produced; comparison is made against a matched group.",
+    word_one:"word", word_many:"words",
+    m_tokens:"Words (excluding fillers)", m_types:"Distinct words", m_ttr:"TTR", m_cttr:"CTTR", m_mattr:"MATTR (window 50)",
+    m_vague:"Pronouns / empty speech", m_fill:"Hesitations (fillers)", m_reps:"Immediate repetitions",
+    m_wf:"Word-finding expressions", m_utt:"Utterances", m_mlu:"Mean length of utterance", m_mlu_unit:"words",
+    h2_how:"What it measures and why",
+    c1_h:"Lexical diversity", c1_p:"TTR, CTTR, MATTR. Part of the literature reports reduced values in MCI / early AD, especially in picture description.",
+    c2_h:"Pronouns & empty speech", c2_p:"More “this / something / thing” instead of specific nouns is associated with anomia.",
+    c3_h:"Hesitations", c3_p:"Fillers such as “uh / um”. True pauses require an audio file — this site analyzes text.",
+    c4_h:"Syntax", c4_p:"Mean length of utterance as a rough index of simplification. It depends on the task and on punctuation.",
+    h2_limits:"Protocol and limits",
+    l1:"The same task every time (e.g. a Cookie Theft description, about one minute).",
+    l2:"Transcribe with fillers and repetitions, without “cleaning up” the speech.",
+    l3:"Compare with a matched group (age, education, language) — not with absolute thresholds.",
+    l4:"A second sample before any research interpretation.",
+    l5:"Clinical assessment belongs to healthcare professionals, not to this application.",
+    f1:"NeuroLex · educational tool · © 2026 Nikos Michailakis. All rights reserved.",
+    f2:"Independent of Linguify. The code runs locally in your browser — your text is never sent to a server.",
+    toggle:"ΕΛ"
+  }
+};
+
+let ui = "el";
+try {
+  const saved = localStorage.getItem("neurolex-ui");
+  if (saved === "el" || saved === "en") ui = saved;
+  else ui = ((navigator.language || "").toLowerCase().startsWith("el")) ? "el" : "en";
+} catch (e) {
+  ui = ((navigator.language || "").toLowerCase().startsWith("el")) ? "el" : "en";
+}
+const t = k => UI[ui][k];
 const f2 = x => x.toFixed(2);
 const pct = x => (x*100).toFixed(1) + "%";
-function render(r){
+
+// what the Results card currently shows: "initial" | "none" | a result object
+let resultsState = "initial";
+
+function renderResults(){
+  const box = $("results");
+  if (resultsState === "initial") { box.innerHTML = '<p class="muted" style="margin:0">' + t("res_initial") + '</p>'; return; }
+  if (resultsState === "none") { box.innerHTML = '<p class="muted" style="margin:0">' + t("res_none") + '</p>'; return; }
+  const r = resultsState;
   const items = [
-    ["Λέξεις (χωρίς fillers)", r.tokens],
-    ["Διαφορετικές λέξεις", r.types],
-    ["TTR", f2(r.ttr)],
-    ["CTTR", f2(r.cttr)],
-    ["MATTR (παράθυρο 50)", f2(r.mattr)],
-    ["Αντωνυμίες / κενός λόγος", r.vague + " (" + pct(r.vagueRate) + ")"],
-    ["Δισταγμοί (fillers)", r.fillers + " (" + pct(r.fillerRate) + ")"],
-    ["Άμεσες επαναλήψεις", r.reps],
-    ["Εκφράσεις εύρεσης λέξης", r.wordFinding],
-    ["Εκφωνήσεις", r.utterances],
-    ["Μέσο μήκος εκφώνησης", f2(r.mlu) + " λέξεις"]
+    [t("m_tokens"), r.tokens],
+    [t("m_types"), r.types],
+    [t("m_ttr"), f2(r.ttr)],
+    [t("m_cttr"), f2(r.cttr)],
+    [t("m_mattr"), f2(r.mattr)],
+    [t("m_vague"), r.vague + " (" + pct(r.vagueRate) + ")"],
+    [t("m_fill"), r.fillers + " (" + pct(r.fillerRate) + ")"],
+    [t("m_reps"), r.reps],
+    [t("m_wf"), r.wordFinding],
+    [t("m_utt"), r.utterances],
+    [t("m_mlu"), f2(r.mlu) + " " + t("m_mlu_unit")]
   ];
-  $("results").innerHTML =
+  box.innerHTML =
     '<div class="grid">' + items.map(([k,v]) => '<div class="metric"><b>'+v+'</b><span>'+k+'</span></div>').join("") + '</div>' +
-    '<p class="muted" style="font-size:13px;margin:12px 0 0">Περιγραφικοί δείκτες μόνο. Δεν υπάρχουν κατώφλια και δεν προκύπτει διάγνωση· η σύγκριση γίνεται με ομόλογη ομάδα.</p>';
+    '<p class="muted" style="font-size:13px;margin:12px 0 0">' + t("res_note") + '</p>';
 }
 function updateCount(){
-  const t = $("text").value;
-  const n = tokenize(t).length;
-  $("count").textContent = n + (n === 1 ? " λέξη" : " λέξεις");
+  const n = tokenize($("text").value).length;
+  $("count").textContent = n + " " + (n === 1 ? t("word_one") : t("word_many"));
 }
-$("text").addEventListener("input", updateCount);
-$("analyze").addEventListener("click", () => {
-  const t = $("text").value.trim();
-  if(!t){ $("results").innerHTML = '<p class="muted" style="margin:0">Δεν υπάρχει κείμενο για ανάλυση.</p>'; return; }
-  render(analyze(t, $("lang").value));
-});
+function applyUI(){
+  document.documentElement.lang = ui;
+  document.querySelectorAll("[data-i18n]").forEach(el => { el.textContent = t(el.getAttribute("data-i18n")); });
+  document.querySelectorAll("[data-i18n-ph]").forEach(el => { el.placeholder = t(el.getAttribute("data-i18n-ph")); });
+  $("langToggle").textContent = t("toggle");
+  updateCount();
+  renderResults();
+}
+function matchedSample(){
+  const v = $("text").value;
+  for (const l of Object.keys(SAMPLES)) for (const k of ["typical","empty"]) if (v === SAMPLES[l][k]) return k;
+  return null;
+}
 function loadSample(kind){
   const lang = $("lang").value;
   $("text").value = SAMPLES[lang][kind];
   updateCount();
-  render(analyze($("text").value, lang));
+  resultsState = analyze($("text").value, lang);
+  renderResults();
 }
+
+$("text").addEventListener("input", updateCount);
+$("analyze").addEventListener("click", () => {
+  const txt = $("text").value.trim();
+  resultsState = txt ? analyze(txt, $("lang").value) : "none";
+  renderResults();
+});
 $("sampleTypical").addEventListener("click", () => loadSample("typical"));
 $("sampleEmpty").addEventListener("click", () => loadSample("empty"));
+$("langToggle").addEventListener("click", () => {
+  ui = ui === "el" ? "en" : "el";
+  try { localStorage.setItem("neurolex-ui", ui); } catch (e) {}
+  const sample = matchedSample();
+  const blank = !$("text").value.trim();
+  if (sample || blank) $("lang").value = ui;   // keep transcript language in step with the page language
+  applyUI();
+  if (sample) loadSample(sample);              // swap a loaded teaching sample into the new language
+});
+
+// initial state
+$("lang").value = ui;
+applyUI();
 </script>
 </body>
 </html>

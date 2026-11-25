@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>NeuroLex</title>
+<title>NeuroLex · by Glottiq</title>
 <meta name="author" content="Nikos Michailakis">
 <meta name="copyright" content="© 2026 Nikos Michailakis. All rights reserved.">
 <style>
@@ -13,6 +13,7 @@
 body{margin:0;font:16px/1.55 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--bg);color:var(--ink)}
 header{display:flex;gap:20px;align-items:center;padding:14px 20px;border-bottom:1px solid var(--line);background:var(--card);position:sticky;top:0}
 header strong{font-size:18px;margin-right:auto}
+header strong small{font-size:12px;font-weight:600;color:var(--muted);margin-left:6px;letter-spacing:.03em}
 header a{color:var(--muted);text-decoration:none;font-size:14px}
 header a:hover{color:var(--accent)}
 main{max-width:860px;margin:0 auto;padding:24px 16px 48px}
@@ -44,7 +45,7 @@ footer{text-align:center;font-size:13px;color:var(--muted);padding:0 16px 32px}
 </head>
 <body>
 <header>
-  <strong>NeuroLex</strong>
+  <strong>NeuroLex<small>by Glottiq</small></strong>
   <a href="#tool" data-i18n="nav_tool">Εργαλείο</a>
   <a href="#how" data-i18n="nav_how">Πώς μετρά</a>
   <a href="#limits" data-i18n="nav_limits">Όρια</a>
@@ -98,7 +99,7 @@ footer{text-align:center;font-size:13px;color:var(--muted);padding:0 16px 32px}
   </ol>
 </section>
 </main>
-<footer><span data-i18n="f1">NeuroLex · εκπαιδευτικό εργαλείο · © 2026 Νίκος Μιχαηλάκης. Με επιφύλαξη παντός δικαιώματος.</span><br><span data-i18n="f2">Ανεξάρτητο από το Linguify. Ο κώδικας τρέχει τοπικά στον browser — το κείμενο δεν στέλνεται σε διακομιστή.</span></footer>
+<footer><span data-i18n="f1">NeuroLex by Glottiq · εκπαιδευτικό εργαλείο · © 2026 Νίκος Μιχαηλάκης. Με επιφύλαξη παντός δικαιώματος.</span><br><span data-i18n="f2">Ανεξάρτητο από το Linguifai. Ο κώδικας τρέχει τοπικά στον browser — το κείμενο δεν στέλνεται σε διακομιστή.</span></footer>
 
 <!-- © 2026 Nikos Michailakis. All rights reserved. NeuroLex source code and text may not be copied, modified or redistributed without written permission. -->
 <script>
@@ -216,8 +217,8 @@ const UI = {
     l3:"Σύγκριση με ομόλογη ομάδα (ηλικία, εκπαίδευση, γλώσσα) — όχι με απόλυτα κατώφλια.",
     l4:"Δεύτερο δείγμα πριν από οποιαδήποτε ερευνητική ερμηνεία.",
     l5:"Κλινική εκτίμηση ανήκει σε επαγγελματίες υγείας, όχι σε αυτή την εφαρμογή.",
-    f1:"NeuroLex · εκπαιδευτικό εργαλείο · © 2026 Νίκος Μιχαηλάκης. Με επιφύλαξη παντός δικαιώματος.",
-    f2:"Ανεξάρτητο από το Linguify. Ο κώδικας τρέχει τοπικά στον browser — το κείμενο δεν στέλνεται σε διακομιστή.",
+    f1:"NeuroLex by Glottiq · εκπαιδευτικό εργαλείο · © 2026 Νίκος Μιχαηλάκης. Με επιφύλαξη παντός δικαιώματος.",
+    f2:"Ανεξάρτητο από το Linguifai. Ο κώδικας τρέχει τοπικά στον browser — το κείμενο δεν στέλνεται σε διακομιστή.",
     toggle:"EN"
   },
   en: {
@@ -247,8 +248,8 @@ const UI = {
     l3:"Compare with a matched group (age, education, language) — not with absolute thresholds.",
     l4:"A second sample before any research interpretation.",
     l5:"Clinical assessment belongs to healthcare professionals, not to this application.",
-    f1:"NeuroLex · educational tool · © 2026 Nikos Michailakis. All rights reserved.",
-    f2:"Independent of Linguify. The code runs locally in your browser — your text is never sent to a server.",
+    f1:"NeuroLex by Glottiq · educational tool · © 2026 Nikos Michailakis. All rights reserved.",
+    f2:"Independent of Linguifai. The code runs locally in your browser — your text is never sent to a server.",
     toggle:"ΕΛ"
   }
 };
